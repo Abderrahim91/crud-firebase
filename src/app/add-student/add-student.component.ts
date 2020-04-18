@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../shared/services/student.service';
 import { Student } from '../shared/models/student';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-student',
@@ -18,8 +19,19 @@ export class AddStudentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  save() {
-    this.studentService.AddStudent({...this.student })
-  }
-
+  save(formAdd:NgForm) {
+    if (!this.student.id) {
+      this.studentService.AddStudent({ ...this.student }).then((res) => {
+      formAdd.resetForm();
+      })
+      } else {
+      this.studentService.updateStudent(this.student);
+      }
+      }  
+  getStudent(id) {
+    this.studentService.getStudent(id).subscribe(res => {
+    this.student = res.data() as Student;
+    this.student.id = res.id;
+    });
+    }
 }

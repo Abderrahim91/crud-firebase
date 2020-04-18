@@ -14,15 +14,18 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 //import { AngularFireStorageModule } from '@angular/f';
 
 import { environment } from '../environments/environment';
+import { ListStudentsComponent } from './list-students/list-students.component';
 
 const routes: Routes = [
   { path: 'add-student', component: AddStudentComponent },
+  { path: 'list-students', component: ListStudentsComponent },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddStudentComponent
+    AddStudentComponent,
+    ListStudentsComponent
   ],
   imports: [
     BrowserModule,
